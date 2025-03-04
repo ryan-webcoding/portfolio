@@ -89,7 +89,10 @@ function playAnimation() {
 }
 
 function updateCounter() {
-  if (reachedMaxCount) return; // Stop counting after 100
+  if (reachedMaxCount) {
+    window.location.href = "../stage3/index.html"; // Redirect to another page
+    return;
+  }
 
   clickCount++;
   const counterElement = document.querySelector(".counter");
