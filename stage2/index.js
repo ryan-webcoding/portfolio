@@ -30,6 +30,7 @@ function spawnBall() {
     type: "dynamic",
     position: pl.Vec2(15, 15),
     linearVelocity: { x: 10, y: -10 },
+    angularVelocity: -10,
   });
   ballBody.createFixture(pl.Circle(40 / 30 - 0.65), {
     density: 1.0,
@@ -53,11 +54,36 @@ function spawnBall() {
 function updateBallPositions() {
   balls.forEach((ballBody) => {
     const position = ballBody.getPosition();
+    const angle = ballBody.getAngle(); // Get the body's rotation
+
     if (ballBody.imageElement) {
       ballBody.imageElement.style.left = position.x * pixelsToMeters + "px";
       ballBody.imageElement.style.top = position.y * pixelsToMeters + "px";
+      ballBody.imageElement.style.transform = `rotate(${
+        angle * (180 / Math.PI)
+      }deg)`;
     }
   });
+}
+
+function playAnimation() {
+  const animationFrames = [
+    "./frames/2.png",
+    "./frames/3.png",
+    "./frames/4.png",
+    "./frames/1.png",
+  ];
+  let frameIndex = 0;
+  const animationElement = document.getElementById("animation");
+
+  function nextFrame() {
+    if (frameIndex < animationFrames.length) {
+      animationElement.src = animationFrames[frameIndex];
+      frameIndex++;
+      setTimeout(nextFrame, 1000 / 60); // 60 FPS
+    }
+  }
+  nextFrame();
 }
 
 function update() {
@@ -70,6 +96,7 @@ document.addEventListener("mousedown", (event) => {
   if (event.button === 0) {
     // Left mouse button
     spawnBall();
+    playAnimation();
   }
 });
 
