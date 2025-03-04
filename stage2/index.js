@@ -6,6 +6,8 @@ const world = new pl.World(pl.Vec2(0, 10));
 
 const pixelsToMeters = 30;
 let balls = []; // Store all ball instances
+let clickCount = 0;
+let reachedMaxCount = false;
 
 // Static wall (matching CSS wall position and size)
 const wallBody = world.createBody({
@@ -86,6 +88,25 @@ function playAnimation() {
   nextFrame();
 }
 
+function updateCounter() {
+  if (reachedMaxCount) return; // Stop counting after 100
+
+  clickCount++;
+  const counterElement = document.querySelector(".counter");
+
+  if (clickCount === 50) {
+    counterElement.textContent = `you've launched half-finished project 50 times, half way through!!`;
+  } else if (clickCount === 80) {
+    counterElement.textContent = `you've launched half-finished project 80 times, almost there!!!`;
+  } else if (clickCount === 100) {
+    counterElement.textContent = `congrats! you unlocked the ultimate secret!`;
+    document.getElementById("laptop").style.display = "block";
+    reachedMaxCount = true; // Stop further updates
+  } else {
+    counterElement.textContent = `you've launched half-finished project ${clickCount} times, keep working`;
+  }
+}
+
 function update() {
   world.step(1 / 60);
   updateBallPositions();
@@ -97,6 +118,7 @@ document.addEventListener("mousedown", (event) => {
     // Left mouse button
     spawnBall();
     playAnimation();
+    updateCounter();
   }
 });
 
