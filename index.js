@@ -1,48 +1,27 @@
-document.addEventListener("DOMContentLoaded", function () {
-  async function displayTextOnClick(
-    paragraphID,
-    fileAddress,
-    dialogueBoxID,
-    nextPage
-  ) {
-    try {
-      const response = await fetch(fileAddress);
-      if (!response.ok) {
-        throw new Error("Failed to load JSON file");
-      }
+document.addEventListener("DOMContentLoaded", () => {
+  const noButton = document.querySelector(".no");
+  const yesButton = document.querySelector(".yes");
 
-      const data = await response.json();
-      if (!Array.isArray(data)) {
-        throw new Error("JSON file must contain an array");
-      }
+  function addSpinEffect(element) {
+    element.addEventListener("mouseenter", () => {
+      element.style.transition = "transform 0.3s ease";
+      element.style.transform = "rotate(360deg)";
+    });
 
-      let index = 0;
-      const paragraph = document.getElementById(paragraphID);
-      const dialogueBox = document.getElementById(dialogueBoxID);
-
-      if (!paragraph || !dialogueBox) {
-        throw new Error("Invalid paragraphID or dialogueBoxID");
-      }
-
-      paragraph.innerText = data[index]; // Display the first message
-
-      document.addEventListener("click", function () {
-        index++;
-        if (index < data.length) {
-          paragraph.innerText = data[index];
-        } else {
-          window.location.replace(nextPage); // Navigate to the next page
-        }
-      });
-    } catch (error) {
-      console.error(error.message);
-    }
+    element.addEventListener("mouseleave", () => {
+      element.style.transition = "transform 0.3s ease";
+      element.style.transform = "rotate(0deg)";
+    });
   }
 
-  displayTextOnClick(
-    "dialogues",
-    "./dialogue.json",
-    "dialogue-container",
-    "./stage2/index.html"
-  );
+  addSpinEffect(noButton);
+  addSpinEffect(yesButton);
+
+  noButton.addEventListener("click", () => {
+    window.location.href = "https://www.google.com";
+  });
+
+  yesButton.addEventListener("click", () => {
+    window.location.href = "./stage1/index.html"; // Change to the actual file name
+  });
 });

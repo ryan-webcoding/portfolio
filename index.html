@@ -7,17 +7,21 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <img class="idle-image" src="./img/1.png" alt="idle" />
-    <div id="balls-scene-container">
-      <div id="wall"></div>
-      <div id="floor"></div>
+    <div class="pop-up-container">
+      <div class="pop-up">
+        <p class="caution">caution</p>
+        <p class="text">
+          The website you are about to enter is not optimized for mobile or
+          small-screen devices. For the best experience, we strongly recommend
+          accessing it on a desktop or a device with a screen width greater than
+          its height
+        </p>
+        <div class="buttons">
+          <img class="no" src="./emoji/cross.svg" alt="no" />
+          <img class="yes" src="./emoji/checkmark.svg" alt="yes" />
+        </div>
+      </div>
     </div>
-
-    <div id="dialogue-container">
-      <div id="head"><p>ryan</p></div>
-      <div id="message"><p id="dialogues"></p></div>
-    </div>
-
     <script src="./index.js"></script>
   </body>
 </html>
