@@ -47,28 +47,33 @@
   min-width: 1200px;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 16%;
-  margin-top: 25%;
+  margin-left: 35vh;
+  margin-top: 44vh;
 }
 #head {
   margin: 0;
   padding: 0;
-  width: 60px;
+  width: 70px;
   height: auto;
   background-color: rgba(217, 217, 217);
   border: 2px solid black;
   border-bottom: 0;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 #message {
   margin: 0;
   padding: 0;
   background-color: rgba(217, 217, 217);
   width: 80%;
+  min-height: 14vh;
   border: 2px solid black;
-  border-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 p {
+  margin: 1vh;
   font-size: 30px;
 }
