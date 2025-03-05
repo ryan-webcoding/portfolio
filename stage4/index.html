@@ -3,9 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Typer Effect</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+
+    <style>
+      body {
+        background-color: black;
+        font-family: Arial, sans-serif;
+      }
+      p {
+        color: #00ff00;
+        text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 20px #008000;
+        background-color: black;
+        display: none;
+        white-space: pre-wrap;
+        margin: 0;
+      }
+      .cursor {
+        display: inline-block;
+        width: 10px;
+        height: 4px;
+        background-color: #00ff00;
+        margin-left: 2px;
+        animation: blink 1s steps(1) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
   <body>
-    <p>welcome to the real world</p>
+    <p>so do you want to see some real stuff?</p>
+    <p>like react project, next project something like that</p>
+    <p>don't worry mate</p>
+    <p>i'll throw some contact info first</p>
+    <p>here's my linkedin</p>
+    <p><i class="bi bi-linkedin"></i>linkedin.com/in/zhengyang-luo</p>
+    <p>my github</p>
+    <p><i class="bi bi-github"></i>https://github.com/ryan-webcoding</p>
+    <p>my email and phone number</p>
+    <p>ryan.luo.bestinindustry@gmail.com</p>
+    <p>+61 411398453</p>
+    <p>and last but not least</p>
+    <p>my react portfolio</p>
+    <p>pretty boring stuff to be fair</p>
+    <p>all right mate that's it</p>
+    <p>have a great day</p>
+    <span id="cursor" class="cursor"></span>
+
+    <script>
+      let index = 0; // Track current paragraph index
+      let paragraphs = document.querySelectorAll("p");
+      let cursor = document.getElementById("cursor");
+      document.body.appendChild(cursor); // Ensure cursor is always part of the body
+
+      function showNextParagraph() {
+        if (index >= paragraphs.length) return;
+
+        let p = paragraphs[index];
+        p.style.display = "block"; // Reveal paragraph
+
+        let text = p.textContent; // Store original text
+        p.textContent = ""; // Clear content for typing effect
+
+        let i = 0;
+        let interval = setInterval(() => {
+          if (i < text.length) {
+            p.textContent += text[i];
+            cursor.style.display = "inline-block";
+            p.appendChild(cursor); // Move cursor along with text
+            i++;
+          } else {
+            clearInterval(interval);
+            index++; // Move to next paragraph
+            let newLine = document.createElement("br");
+            cursor.style.display = "inline-block";
+            cursor.style.position = "relative";
+            cursor.style.left = "0px";
+            cursor.style.top = "5px";
+            p.parentNode.insertBefore(cursor, p.nextSibling); // Move cursor to next line without creating extra gaps
+          }
+        }, 50); // Adjust speed here (50ms per letter)
+      }
+
+      document.addEventListener("click", showNextParagraph);
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          showNextParagraph();
+        }
+      });
+    </script>
   </body>
 </html>
