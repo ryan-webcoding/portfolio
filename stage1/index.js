@@ -43,6 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
     "dialogues",
     "./dialogue.json",
     "dialogue-container",
-    "./stage2/index.html"
+    "../stage2/index.html"
   );
 });
