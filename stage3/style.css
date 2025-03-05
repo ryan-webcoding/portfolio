@@ -46,6 +46,8 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  font-size: 30px;
+  color: red;
 }
 
 #paper-ball {
@@ -63,4 +65,13 @@
   margin-left: 360px;
   z-index: 10; /* Ensures it's above other elements */
   pointer-events: auto; /* Makes sure it receives mouse events */
+}
+
+#firework {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  width: 400px;
+  margin-top: 300px;
+  margin-left: 260px;
 }

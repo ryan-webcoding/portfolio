@@ -28,6 +28,8 @@ floorBody.createFixture(
 );
 
 function spawnBall() {
+  if (reachedMaxCount) return; // Prevent ball generation after max count
+
   const ballBody = world.createBody({
     type: "dynamic",
     position: pl.Vec2(15, 15),
@@ -69,6 +71,8 @@ function updateBallPositions() {
 }
 
 function playAnimation() {
+  if (reachedMaxCount) return; // Prevent animation after max count
+
   const animationFrames = [
     "./frames/2.png",
     "./frames/3.png",
@@ -88,6 +92,8 @@ function playAnimation() {
   nextFrame();
 }
 
+const counterElement = document.querySelector(".counter");
+
 function updateCounter() {
   if (reachedMaxCount) {
     window.location.href = "../stage3/index.html"; // Redirect to another page
@@ -95,7 +101,13 @@ function updateCounter() {
   }
 
   clickCount++;
-  const counterElement = document.querySelector(".counter");
+
+  let progress = clickCount / 100; // Progress from 0 to 1
+  let redValue = Math.floor(progress * 255); // Transition from black to red
+  let fontSize = 16 + progress * 14; // Start from 16px and grow to 30px
+
+  counterElement.style.color = `rgb(${redValue}, 0, 0)`;
+  counterElement.style.fontSize = `${fontSize}px`;
 
   if (clickCount === 50) {
     counterElement.textContent = `you've launched half-finished project 50 times, half way through!!`;
@@ -118,7 +130,10 @@ function update() {
 
 document.addEventListener("mousedown", (event) => {
   if (event.button === 0) {
-    // Left mouse button
+    if (reachedMaxCount) {
+      window.location.href = "../stage3/index.html"; // Redirect on the next click
+      return;
+    }
     spawnBall();
     playAnimation();
     updateCounter();

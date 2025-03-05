@@ -1,3 +1,11 @@
+// Show the firework initially
+firework.style.visibility = "visible";
+
+// Hide the firework after 2 seconds
+setTimeout(() => {
+  firework.style.visibility = "hidden";
+}, 1725);
+
 document.addEventListener("DOMContentLoaded", () => {
   const img = document.getElementById("laptop");
 
