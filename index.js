@@ -23,16 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     switch (noClickCount) {
       case 1:
-        alert("How dare you");
+        alert("you sure?");
         break;
       case 2:
-        alert("I warned you!");
+        alert("could still be fun though..");
         break;
       case 3:
-        alert("Please dont, you'll regret it.");
+        alert(
+          "click again i'll bring you to the project im currently working on"
+        );
         break;
       case 4:
-        window.location.href = "https://www.google.com";
+        window.location.href =
+          "https://ryan-webcoding.github.io/portfolio-single-page/";
         break;
       default:
         break;
